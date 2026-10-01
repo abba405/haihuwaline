@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --color-bg: #F6F3EC;
+  --color-surface: #FFFFFF;
+  --color-text: #21201C;
+  --color-text-muted: #5B564C;
+  --color-primary: #0F5E56;
+  --color-primary-dark: #0B403B;
+  --color-accent: #E2572B;
+  --color-amber: #D9A441;
+  --color-sage: #6B8F5E;
+  --color-border: #E4DDCB;
+  --radius: 10px;
+
+  /* Font stacks: named webfont first, but a solid local fallback that still
+     looks intentional if the venue's connection can't fetch Google Fonts. */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Work Sans', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* A small, deliberate type scale — five sizes, reused everywhere, so
+     hierarchy comes from weight/color rather than one-off pixel values. */
+  --text-xs: 13px;
+  --text-sm: 15px;
+  --text-base: 17px;
+  --text-lg: 24px;
+  --text-display: 34px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+h1 { font-size: var(--text-display); }
+h2 { font-size: var(--text-lg); }
+
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+
+a { color: var(--color-primary-dark); }
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+header.site {
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px 0;
+}
+header.site .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header.site .brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+header.site nav a {
+  margin-left: 24px;
+  text-decoration: none;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+header.site nav a:hover { color: var(--color-primary); }
+
+.dial-callout {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  background: var(--color-primary-dark);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+}
+.dial-callout .code {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.dial-callout .label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: #E8E3D8;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: var(--text-xs);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.status-new { background: #FBE4DC; color: var(--color-accent); }
+.status-acknowledged { background: #F6EAD1; color: #8A6512; }
+.status-resolved { background: #E4EDDE; color: #43592E; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+/* One orchestrated entrance moment for the hero — not scattered per-element effects */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in {
+  opacity: 0;
+  animation: rise-in 0.6s ease-out forwards;
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  margin-right: 6px;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
+}
+
+@keyframes flash-in {
+  from { background: #FBE4DC; }
+  to { background: var(--color-surface); }
+}
+.just-arrived {
+  animation: flash-in 2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in, .pulse-dot, .just-arrived { animation: none; opacity: 1; }
+}
