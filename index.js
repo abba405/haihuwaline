@@ -54,14 +54,22 @@ app.post('/ussd', async (req, res) => {
       } else if (parts.length === 4 && parts[1] === '1') {
         const type = EMERGENCY_TYPES[parts[2]];
         const ward = WARDS[parts[3]];
+        response = (type && ward) ? t.landmarkPrompt : t.invalidOption;
+      } else if (parts.length === 5 && parts[1] === '1') {
+        const type = EMERGENCY_TYPES[parts[2]];
+        const ward = WARDS[parts[3]];
+        const landmarkInput = parts[4];
+        const landmark = landmarkInput === '0' ? null : landmarkInput;
+
         if (!type || !ward) {
           response = t.invalidOption;
         } else {
-          createReport({ reporterPhone: phoneNumber, emergencyType: type, ward, sourceChannel: 'ussd' });
+          createReport({ reporterPhone: phoneNumber, emergencyType: type, ward, landmark, sourceChannel: 'ussd' });
           const facility = getFacilityByWard(ward);
 
           if (facility) {
-            const alertMessage = `EMERGENCY (${type.replace('_', ' ')}) reported in ${ward}. Reporter: ${phoneNumber}. Please respond.`;
+            const landmarkNote = landmark ? ` Landmark: ${landmark}.` : '';
+            const alertMessage = `EMERGENCY (${type.replace('_', ' ')}) reported in ${ward}.${landmarkNote} Reporter: ${phoneNumber}. Please respond.`;
             sendSMS(facility.phone, alertMessage); // fire-and-forget — don't block the USSD response on SMS delivery
           }
 

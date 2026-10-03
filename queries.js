@@ -1,10 +1,10 @@
 const db = require('./db');
 
-function createReport({ reporterPhone, emergencyType, ward, sourceChannel }) {
+function createReport({ reporterPhone, emergencyType, ward, landmark, sourceChannel }) {
   const info = db.prepare(`
-    INSERT INTO report (reporter_phone, emergency_type, location_ward, source_channel)
-    VALUES (?, ?, ?, ?)
-  `).run(reporterPhone, emergencyType, ward, sourceChannel);
+    INSERT INTO report (reporter_phone, emergency_type, location_ward, landmark, source_channel)
+    VALUES (?, ?, ?, ?, ?)
+  `).run(reporterPhone, emergencyType, ward, landmark || null, sourceChannel);
   return info.lastInsertRowid;
 }
 

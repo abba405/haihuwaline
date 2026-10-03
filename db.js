@@ -17,6 +17,7 @@ db.exec(`
     reporter_phone   TEXT NOT NULL,
     emergency_type   TEXT NOT NULL CHECK (emergency_type IN ('bleeding','prolonged_labor','seizure','other')),
     location_ward    TEXT NOT NULL,
+    landmark         TEXT,
     source_channel   TEXT NOT NULL CHECK (source_channel IN ('ussd','sms','web','voice')),
     status           TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new','acknowledged','resolved')),
     created_at       TEXT NOT NULL DEFAULT (datetime('now')),

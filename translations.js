@@ -14,6 +14,7 @@ const MESSAGES = {
 2. Nassarawa
 3. Dala
 4. Other / not listed`,
+    landmarkPrompt: `CON Enter a nearby landmark (e.g. "near the market"), or send 0 to skip:`,
     facilityInfo: (facility) => `END Nearest facility: ${facility.name}\nPhone: ${facility.phone}`,
     noFacilityInfo: `END No facility info available for that ward right now.`,
     reportConfirmation: (facility) => facility
@@ -27,14 +28,15 @@ const MESSAGES = {
 1. Kai rahoton gaggawa
 2. Bayanin asibiti mafi kusa`,
     emergencyTypeMenu: `CON Zaɓi irin gaggawar
-1. Zubar jini
+1. Zub da jini
 2. Wahalar haihuwa
 3. Wata alamar hatsari`,
     wardMenu: `CON Zaɓi unguwarka
 1. Gwale
 2. Nassarawa
 3. Dala
-4. Waninsu / ba bu a cikin jerin`,
+4. Waninsu / ba a jera ba`,
+    landmarkPrompt: `CON Shigar da wata alama ta kusa (misali "kusa da kasuwa"), ko aika 0 don tsallakewa:`,
     facilityInfo: (facility) => `END Asibiti mafi kusa: ${facility.name}\nLambar waya: ${facility.phone}`,
     noFacilityInfo: `END Babu bayanin asibiti a unguwar nan a yanzu.`,
     reportConfirmation: (facility) => facility
